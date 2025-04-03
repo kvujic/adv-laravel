@@ -14,7 +14,6 @@ class AuthorsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
         $param = [
             'name' => 'tony',
             'age' => 35,
