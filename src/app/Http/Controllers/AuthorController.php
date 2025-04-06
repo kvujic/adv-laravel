@@ -69,6 +69,12 @@ class AuthorController extends Controller
         return redirect('/');
     }
 
+    //　エラーメッセージの表示
+    public function verror()
+    {
+        return view('verror');
+    }
+
     //　name属性を利用して検索
     public function find()
     {
@@ -91,5 +97,14 @@ class AuthorController extends Controller
             'item' => $author,
         ];
         return view('author.binds', $data);
+    }
+
+    //　リレーションの確認
+    public function relate()
+    {
+        $hasItems = Author::has('book')->get();
+        $noItems = Author::doesntHave('book')->get();
+        $param = ['hasItems' => $hasItems, 'noItems' => $noItems];
+        return view('author.index', $param);
     }
 }

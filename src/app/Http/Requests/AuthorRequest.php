@@ -42,4 +42,9 @@ class AuthorRequest extends FormRequest
             'nationality.required' => '国籍を入力してください',
         ];
     }
+
+    protected function getRedirectUrl()
+    {
+        return 'verror';
+    }
 }

@@ -18,4 +18,15 @@ class Author extends Model
         return $txt;
     }
 
+    // 1対１のリレーション、１つのレコードしか取り出せないため、単数系の名前を使う
+    public function book()
+    {
+        return $this->hasOne('App\Models\Book');
+    }
+
+    // 1対多のリレーション、複数のレコードを取り出せるため、複数系の名前を使う
+    public function books() {
+        return $this->hasMany('App\Models\Book');
+    }
+
 }
