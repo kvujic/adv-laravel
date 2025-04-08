@@ -15,7 +15,9 @@ class AuthorController extends Controller
     // Authorモデルを利用できるようにする
     public function index()
     {
-        $authors = Author::all();  // Authorテーブルから全権取得を行なっている
+        $authors = Author::paginate(4);
+
+        //$authors = Author::all();  // Authorテーブルから全権取得を行なっている
 
         // debug用
         //dd($authors);

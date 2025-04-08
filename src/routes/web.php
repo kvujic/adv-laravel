@@ -6,6 +6,12 @@ use App\Models\Author;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SessionController;
+
+/*
+データベースに値が保存されているか確認するためのルート
+use Illuminate\Support\Facades\Session;
+*/
 
 /*
 |--------------------------------------------------------------------------
@@ -37,3 +43,23 @@ Route::prefix('book')->group(function() {
 });
 
 Route::get('/relation', [AuthorController::class, 'relate']);
+
+Route::get('/session', [SessionController::class, 'getSes']);
+Route::post('/session', [SessionController::class, 'postSes']);
+
+
+/*　
+データベースに値が保存されているか確認するためのルート
+
+セッションに値を保存する
+Route::get('/session-test', function() {
+    Session::put('test_key', 'これはテストです');
+    return 'セッションに値を保存しました。';
+});
+
+セッションの値を取得する
+Route::get('/session-check', function() {
+    $value = Session::get('test_key', 'セッションに値がありません');
+    return "セッションの値: " . $value;
+});
+*/

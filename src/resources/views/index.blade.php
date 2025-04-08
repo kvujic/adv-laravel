@@ -16,6 +16,11 @@
         background-color: #eeeeee;
         text-align: center;
     }
+
+    svg.w-5.h-5 {
+        wiedth: 30px;
+        height: 30px;
+    }
 </style>
 
 {{-- @yield('title')として'index.blade.php'が表示される --}}
@@ -35,4 +40,7 @@
     </tr>
     @endforeach
 </table>
+{{ $authors->links() }}
+{{-- $authorsの中にあるページネーションの情報を表示するためにlinks()メソッドを使用 --}}
+{{-- これにより、ページネーションのリンクが表示される --}}
 @endsection
