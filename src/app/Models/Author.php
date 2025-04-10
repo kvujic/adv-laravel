@@ -11,10 +11,16 @@ class Author extends Model
 
     protected $fillable = ['name', 'age', 'nationality'];
 
+    public static $rules = array(
+        'name' => 'required',
+        'age' => 'integer|min:0|max:150',
+        'nationality' => 'required'
+    );
+
     // 表示の仕方を変更
     public function getDetail()
     {
-        $txt = 'ID:'.$this->id . ' ' . $this->name . '(' . $this->age . '才' .') '.$this->nationality;
+        $txt = 'ID:' . $this->id . ' ' . $this->name . '(' . $this->age . '才' . ') ' . $this->nationality;
         return $txt;
     }
 
@@ -25,8 +31,8 @@ class Author extends Model
     }
 
     // 1対多のリレーション、複数のレコードを取り出せるため、複数系の名前を使う
-    public function books() {
+    public function books()
+    {
         return $this->hasMany('App\Models\Book');
     }
-
 }

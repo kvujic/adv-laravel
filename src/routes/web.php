@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Models\Person;
 use App\Models\Author;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
@@ -33,10 +34,10 @@ Route::get('/delete', [AuthorController::class, 'delete']);
 Route::post('/delete', [AuthorController::class, 'remove']);
 Route::get('/find', [AuthorController::class, 'find']);
 Route::post('/find', [AuthorController::class, 'search']);
-Route::get('/author/{author}', [AuthorController::class,'bind']);
+Route::get('/author/{author}', [AuthorController::class, 'bind']);
 Route::get('/verror', [AuthorController::class, 'verror']);
 
-Route::prefix('book')->group(function() {
+Route::prefix('book')->group(function () {
     Route::get('/', [BookController::class, 'index']);
     Route::get('/add', [BookController::class, 'add']);
     Route::post('/add', [BookController::class, 'create']);
@@ -46,6 +47,24 @@ Route::get('/relation', [AuthorController::class, 'relate']);
 
 Route::get('/session', [SessionController::class, 'getSes']);
 Route::post('/session', [SessionController::class, 'postSes']);
+
+// 論理削除の実行
+Route::get('/softdelete', function () {
+    Person::find(1)->delete();
+});
+
+// 論理削除されたレコードの確認
+Route::get('softdelete/get', function () {
+    $person = Person::onlyTrashed()->get();
+    dd($person);
+});
+
+// 削除されたレコードの復元
+Route::get('softdelete/store', function () {
+    $result = Person::onlyTrashed()->restore();
+    echo $result;
+});
+
 
 
 /*　

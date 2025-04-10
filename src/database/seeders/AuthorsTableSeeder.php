@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Author; // Authorモデルのインポート
 
 class AuthorsTableSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class AuthorsTableSeeder extends Seeder
      */
     public function run()
     {
+       /*
         $param = [
             'name' => 'tony',
             'age' => 35,
@@ -38,5 +40,9 @@ class AuthorsTableSeeder extends Seeder
             'nationality' => 'Chinese'
         ];
         DB::table('authors')->insert($param);
+        */
+
+        // ファクトリの設定
+        Author::factory()->count(3)->create();
     }
 }
