@@ -4,10 +4,12 @@ use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Models\Person;
 use App\Models\Author;
+use App\Models\Product;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\PenController;
 
 /*
 データベースに値が保存されているか確認するためのルート
@@ -65,6 +67,23 @@ Route::get('softdelete/store', function () {
     echo $result;
 });
 
+// 論理削除したレコードの完全削除
+Route::get('softdelete/absolute', function () {
+    $result = Person::onlyTrashed()->forceDelete();
+    echo $result;
+});
+
+// uuid
+Route::get('uuid', function () {
+    $products = Product::all();
+    foreach ($products as $product) {
+        echo $product . '<br>';
+    }
+});
+
+Route::get('fill', [PenController::class, 'fillPen']);
+Route::get('create', [PenController::class, 'createPen']);
+Route::get('insert', [PenController::class, 'insertPen']);
 
 
 /*　
